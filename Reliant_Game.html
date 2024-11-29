@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Invaders</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #00b3b3; /* Teal background */
+            font-family: 'Press Start 2P', cursive;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        canvas {
+            border: 5px solid #fff;
+            background-color: #001f3d; /* Navy background for canvas */
+            box-shadow: 0 0 20px 5px rgba(255, 215, 0, 0.5);
+        }
+
+        #logo {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            opacity: 1; /* Full opacity for the logo */
+        }
+
+        #game-over {
+            position: absolute;
+            color: #FFD700;
+            font-size: 48px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.7), 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        #score {
+            position: absolute;
+            color: #FFD700;
+            font-size: 20px;
+            top: 10px;
+            left: 10px;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.7), 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+    </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+</head>
+<body>
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <img id="logo" src="https://www.reliantcu.com/files/reliant-logo.png" alt="Reliant Logo">
+    <div id="game-over">GAME OVER</div>
+    <div id="score">Score: 0</div>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const playerWidth = 50;
+        const playerHeight = 30;
+        const bulletWidth = 5;
+        const bulletHeight = 10;
+        const alienWidth = 40;
+        const alienHeight = 40;
+        const alienRowCount = 5;
+        const alienColumnCount = 8;
+
+        let playerX = (canvas.width - playerWidth) / 2;
+        let playerY = canvas.height - playerHeight - 10;
+        let playerSpeed = 5;
+        let rightPressed = false;
+        let leftPressed = false;
+        let spacePressed = false;
+        let bullets = [];
+        let aliens = [];
+        let alienS
